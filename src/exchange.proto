@@ -3,14 +3,16 @@ syntax = "proto3";
 package exchange;
 
 service Exchange {
-  rpc exchange(ExchangeRequest) returns (ExchangeResponse) {}
-  rpc rates() returns (RatesResponse) {}
+  rpc exchange(ExchangeRequest) returns (ExchangeResponse) {};
+  rpc rates(Empty) returns (RatesResponse) {};
 }
 message ExchangeRequest {
-  uint32 value = 1;
+  string value = 1;
   string from = 2;
   string to = 3;
 }
-message ExchangeResponse { uint32 value = 1; }
+message ExchangeResponse { string value = 1; }
 
-message RatesResponse { map<string, float> rates = 1 }
+message RatesResponse { map<string, string> rates = 1; }
+
+message Empty {}
