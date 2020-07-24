@@ -4,6 +4,7 @@ package exchange;
 
 service Exchange {
   rpc exchange(ExchangeRequest) returns (ExchangeResponse) {}
+  rpc rates() returns (RatesResponse) {}
 }
 message ExchangeRequest {
   uint32 value = 1;
@@ -11,3 +12,5 @@ message ExchangeRequest {
   string to = 3;
 }
 message ExchangeResponse { uint32 value = 1; }
+
+message RatesResponse { map<string, float> rates = 1 }
