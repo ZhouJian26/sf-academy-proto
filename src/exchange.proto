@@ -7,12 +7,12 @@ service Exchange {
   rpc rates(Empty) returns (RatesResponse) {};
 }
 message ExchangeRequest {
-  string value = 1;
+  double value = 1;
   string from = 2;
   string to = 3;
 }
-message ExchangeResponse { string value = 1; }
+message ExchangeResponse { double value = 1; }
 
-message RatesResponse { map<string, string> rates = 1; }
+message RatesResponse { map<string, double> rates = 1; }
 
 message Empty {}
