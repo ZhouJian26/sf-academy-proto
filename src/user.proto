@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package user;
+
+service Exchange {
+  rpc signup(SignupRequest) returns (JWTResponse);
+  rpc login(LoginRequest) returns (JWTResponse);
+  rpc deposit(TransferRequest) returns (Empty);
+  rpc withdraw(TransferRequest) returns (Empty);
+  rpc buy(BuyRequest) returns (Empty);
+  rpc listTransactions(ListTransactionsRequest)
+      returns (ListTransactionsResponse);
+}
+
+message SignupRequest {
+  string email = 1;
+  string password = 2;
+  string username = 3;
+  string iban = 4;
+}
+
+message LoginRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message JWTResponse { string token = 1; }
+
+message TransferRequest {
+  string currency = 1;
+  double amount = 2;
+}
+
+message BuyRequest {
+  string srcCurrency = 1;
+  string destCurrency = 2;
+  double amount = 3;
+}
+
+message ListTransactionsRequest { repeated TransactionQuery queries = 1; }
+
+message ListTransactionsResponse { repeated Transaction transactions = 1; }
+
+message TransactionQuery {
+  string currency = 1;
+  string startDate = 2;
+  string endDate = 3;
+}
+
+message Transaction {
+  string src_currency = 1;
+  string dest_currency = 2;
+  string date = 3;
+  string amount = 4;
+  string rate = 5;
+}
+
+message Empty {}
