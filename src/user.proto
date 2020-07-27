@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user;
 
-service Exchange {
+service User {
   rpc signup(SignupRequest) returns (JWTResponse);
   rpc login(LoginRequest) returns (JWTResponse);
   rpc deposit(TransferRequest) returns (Empty);
