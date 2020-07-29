@@ -3,13 +3,14 @@ syntax = "proto3";
 package user;
 
 service User {
-  rpc signup(SignupRequest) returns (JWTResponse);
-  rpc login(LoginRequest) returns (JWTResponse);
+  rpc signup(SignupRequest) returns (JWT);
+  rpc login(LoginRequest) returns (JWT);
   rpc deposit(TransferRequest) returns (Empty);
   rpc withdraw(TransferRequest) returns (Empty);
   rpc buy(BuyRequest) returns (Empty);
   rpc listTransactions(ListTransactionsRequest)
       returns (ListTransactionsResponse);
+  rpc verifyJWT(JWT) returns (Empty);
 }
 
 message SignupRequest {
@@ -24,20 +25,23 @@ message LoginRequest {
   string password = 2;
 }
 
-message JWTResponse { string token = 1; }
-
 message TransferRequest {
-  string currency = 1;
-  double amount = 2;
-}
-
-message BuyRequest {
-  string srcCurrency = 1;
-  string destCurrency = 2;
+  int32 user_id = 1;
+  string currency = 2;
   double amount = 3;
 }
 
-message ListTransactionsRequest { repeated TransactionQuery queries = 1; }
+message BuyRequest {
+  int32 user_id = 1;
+  string srcCurrency = 2;
+  string destCurrency = 3;
+  double amount = 4;
+}
+
+message ListTransactionsRequest {
+  int32 user_id = 1;
+  repeated TransactionQuery queries = 2;
+}
 
 message ListTransactionsResponse { repeated Transaction transactions = 1; }
 
@@ -46,6 +50,8 @@ message TransactionQuery {
   string startDate = 2;
   string endDate = 3;
 }
+
+message JWT { string token = 1; }
 
 message Transaction {
   string src_currency = 1;
