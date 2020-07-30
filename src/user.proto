@@ -10,7 +10,6 @@ service User {
   rpc buy(BuyRequest) returns (Empty);
   rpc listTransactions(ListTransactionsRequest)
       returns (ListTransactionsResponse);
-  rpc verifyJWT(JWT) returns (Empty);
 }
 
 message SignupRequest {
@@ -26,22 +25,17 @@ message LoginRequest {
 }
 
 message TransferRequest {
-  int32 user_id = 1;
-  string currency = 2;
-  double amount = 3;
+  string currency = 1;
+  double amount = 2;
 }
 
 message BuyRequest {
-  int32 user_id = 1;
-  string srcCurrency = 2;
-  string destCurrency = 3;
-  double amount = 4;
+  string srcCurrency = 1;
+  string destCurrency = 2;
+  double amount = 3;
 }
 
-message ListTransactionsRequest {
-  int32 user_id = 1;
-  repeated TransactionQuery queries = 2;
-}
+message ListTransactionsRequest { repeated TransactionQuery queries = 1; }
 
 message ListTransactionsResponse { repeated Transaction transactions = 1; }
 
