@@ -11,7 +11,11 @@ message ExchangeRequest {
   string from = 2;
   string to = 3;
 }
-message ExchangeResponse { double value = 1; }
+
+message ExchangeResponse {
+  double value = 1;
+  double rate = 2;
+}
 
 message RatesResponse { map<string, double> rates = 1; }
 
