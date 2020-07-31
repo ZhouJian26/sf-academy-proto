@@ -7,7 +7,7 @@ service User {
   rpc login(LoginRequest) returns (JWT);
   rpc deposit(TransferRequest) returns (Empty);
   rpc withdraw(TransferRequest) returns (Empty);
-  rpc buy(BuyRequest) returns (Empty);
+  rpc buy(BuyRequest) returns (BuyResponse);
   rpc listTransactions(ListTransactionsRequest)
       returns (ListTransactionsResponse);
 }
@@ -34,6 +34,8 @@ message BuyRequest {
   string destCurrency = 2;
   double amount = 3;
 }
+
+message BuyResponse { double amount = 1; }
 
 message ListTransactionsRequest { repeated TransactionQuery queries = 1; }
 
