@@ -8,6 +8,7 @@ service User {
   rpc deposit(TransferRequest) returns (Empty);
   rpc withdraw(TransferRequest) returns (Empty);
   rpc buy(BuyRequest) returns (BuyResponse);
+  rpc listVirtualPortfolios(Empty) returns (ListVirtualPortfolio);
   rpc listTransactions(ListTransactionsRequest)
       returns (ListTransactionsResponse);
 }
@@ -57,5 +58,12 @@ message Transaction {
   string amount = 4;
   string rate = 5;
 }
-
+message ListVirtualPortfolio {
+  repeated VirtualPortfolio listVirtualPortfolio = 1;
+}
+message VirtualPortfolio {
+  string currency = 1;
+  double balance = 2;
+  string date = 3;
+}
 message Empty {}
